@@ -52,13 +52,19 @@ Do not interpret tasks broadly. Do not do unrequested work.
 
 ## Verification
 
-After implementing, verify your work:
-- Run the test suite
-- Run the linter: `npm run lint`
-- Run the type checker: `npm run typecheck`
-- If a dev server is available, test the affected behavior manually
+After every meaningful code change — not just at end of session:
 
-Claude should never consider a task done until verification passes.
+1. Run `npm test` — this runs tests AND writes `test-results/summary.txt`
+2. Read `test-results/summary.txt` — understand exactly what passed, failed, or has coverage gaps
+3. Fix any failures before moving to the next change
+4. Run `npm run lint` and `npm run typecheck` before committing
+
+If tests fail:
+- Read the full error in `test-results/results.json` for stack traces
+- Fix the code or the test — never skip or comment out failing tests
+- Re-run until summary.txt shows ✅ PASSED
+
+Claude should never consider a task done until `test-results/summary.txt` shows all passing and 100% coverage.
 
 ---
 

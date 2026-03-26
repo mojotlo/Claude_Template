@@ -12,6 +12,10 @@ coverage/
 # Vitest
 coverage/
 
+# Test results (ephemeral, overwritten each run)
+test-results/results.json
+test-results/summary.txt
+
 # Playwright
 playwright-report/
 test-results/

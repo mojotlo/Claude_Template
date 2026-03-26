@@ -6,6 +6,10 @@ export default defineConfig({
     include: ['src/**/*.test.ts'],
     exclude: ['tests/integration/**', 'tests/e2e/**'],
     environment: 'node',
+    reporters: [
+      'default',                          // terminal output as normal
+      ['json', { outputFile: 'test-results/results.json' }],
+    ],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'lcov', 'html'],
