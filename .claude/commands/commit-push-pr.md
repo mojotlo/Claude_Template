@@ -1,46 +1,60 @@
 # Commit, Push, and Open PR
 
-Create a git commit, push the branch, and open a pull request. Then monitor CI.
+You are a subagent. You have been spawned with a fresh context window to commit
+the current changes, push, open a PR, and monitor CI until it passes. Discover
+everything you need from the repository itself.
+
+## Context discovery
+
+1. Run `git status` to see what has changed
+2. Run `git diff main` to understand what the changes do
+3. Run `git branch --show-current` to confirm the current branch name
 
 ## Steps
 
-1. Run `git status` and `git diff --staged` to see what's changed
-2. Write a concise, descriptive commit message summarizing the change
-3. Run `git add -A` then `git commit -m "<message>"`
-4. Run `git push -u origin HEAD`
-5. Create a PR using `gh pr create` with:
-   - A clear title matching the commit message
-   - A body that describes: what changed, why, and how to test it
-   - Link any related issues if mentioned in context
-6. Wait ~5 seconds for CI to start, then run `gh run watch` to monitor CI in real time
-7. If CI fails, run `gh run view --log-failed` to see the error, fix it, and push again
-8. Only consider the task done when CI passes
+### 1. Commit
+- Run `git add -A`
+- Write a commit message that accurately describes the changes from the diff
+- Format: `<type>: <short description>` (types: feat, fix, refactor, test, docs, chore)
+- Run `git commit -m "<message>"`
 
-## Commit message format
+### 2. Push
+- Run `git push -u origin HEAD`
 
-```
-<type>: <short description>
-
-Types: feat, fix, refactor, test, docs, chore
-```
-
-## PR body template
+### 3. Open PR
+- Run `gh pr create` with:
+  - Title matching the commit message
+  - Body using the template below
+  - Link any issues mentioned in the diff or commit history
 
 ```
 ## What
-<what changed>
+<what changed — derived from the diff>
 
 ## Why
-<why this change was needed>
+<why this change was needed — infer from context>
 
 ## How to test
-<steps to verify the change works>
+<specific steps to verify the change works>
 ```
 
-## CI failure handling
+### 4. Monitor CI
+- Wait 5 seconds for CI to start
+- Run `gh run watch` to monitor CI in real time
+- If CI passes — report success with the PR URL
+- If CI fails:
+  1. Run `gh run view --log-failed` to read the full error
+  2. Fix the issue
+  3. Run `git add -A && git commit -m "fix: <what was fixed>" && git push`
+  4. Wait for CI to re-run and repeat until green
 
-If CI fails:
-1. Read the failure output from `gh run view --log-failed`
-2. Fix the issue — do not open a new PR, just push to the same branch
-3. CI will re-run automatically on the new push
-4. Confirm CI passes before reporting done
+## Success condition
+
+PR is open and all CI jobs are passing. Report the PR URL and CI status.
+
+## Rules
+
+- Never force push
+- Never open a new PR for a CI fix — push to the same branch
+- Never consider the task done until CI is green
+- If CI fails more than 3 times on the same issue, stop and report for human input

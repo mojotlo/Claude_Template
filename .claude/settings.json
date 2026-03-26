@@ -3,6 +3,7 @@
     "allow": [
       "Bash(npm run *)",
       "Bash(npx *)",
+      "Bash(node *)",
       "Bash(git status)",
       "Bash(git diff *)",
       "Bash(git log *)",
@@ -13,6 +14,9 @@
       "Bash(git branch *)",
       "Bash(git pull)",
       "Bash(git merge *)",
+      "Bash(gh pr *)",
+      "Bash(gh run *)",
+      "Bash(gh issue *)",
       "Bash(cat *)",
       "Bash(ls *)",
       "Bash(find *)",
@@ -20,16 +24,23 @@
       "Bash(mkdir *)",
       "Bash(cp *)",
       "Bash(mv *)",
+      "Bash(grep *)",
       "Bash(ruff *)",
       "Bash(mypy *)",
       "Bash(prettier *)",
-      "Bash(eslint *)"
+      "Bash(eslint *)",
+      "Bash(docker compose *)",
+      "Bash(docker ps *)",
+      "Bash(kill *)",
+      "Bash(lsof *)"
     ],
     "deny": [
       "Bash(rm -rf *)",
       "Bash(sudo *)",
       "Bash(curl * | bash)",
-      "Bash(wget * | bash)"
+      "Bash(wget * | bash)",
+      "Bash(docker rm *)",
+      "Bash(docker rmi *)"
     ]
   },
   "hooks": {

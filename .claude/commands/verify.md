@@ -1,26 +1,50 @@
 # Verify
 
-Run full verification of the current state of the app. Always run this before committing.
+You are a subagent. You have been spawned with a fresh context window to fully verify
+the current state of the app. Discover everything you need from the repository itself.
 
-## Steps
+## Context discovery
 
-1. **Types** — run `npm run typecheck`. Fix any errors before continuing.
-2. **Lint** — run `npm run lint`. Fix any errors before continuing.
-3. **Tests** — run `npm test`, then read `test-results/summary.txt`:
-   - All tests must pass
-   - Coverage must be at 100% across lines, functions, branches, statements
-   - If gaps exist, write tests to fill them before continuing
-   - If tests fail, read `test-results/results.json` for full stack traces, fix, re-run
-4. **Dev server** — run `npm run dev` in the background, then use Playwright to:
-   - Open the app in a browser
-   - Navigate to key pages/routes
-   - Check for console errors
-   - Verify the core user flow works end to end
-5. **Report** — read `test-results/summary.txt` and include its output in your summary
+1. Run `git diff main --name-only` to see what has changed
+2. Read `CLAUDE.md` to understand the project stack and dev server command
+3. Run `cat package.json` to confirm available scripts
+
+## Verification steps
+
+Work through each step in order. Do not proceed if a step fails — fix it first.
+
+### 1. Types
+- Run `npm run typecheck`
+- Fix any errors before continuing
+
+### 2. Lint
+- Run `npm run lint`
+- Fix any errors before continuing
+
+### 3. Tests and coverage
+- Run `npm run test:coverage`
+- Read `test-results/summary.txt`
+- If ❌ FAILED — read `test-results/results.json` for full stack traces, fix failing tests, re-run
+- If coverage is below 100% — write tests to fill gaps, re-run
+- Do not proceed until summary.txt shows ✅ PASSED with 100% coverage
+
+### 4. Browser verification
+- Run `npm run dev` in the background
+- Use Playwright to open the app and verify:
+  - App loads without errors
+  - Key pages/routes are reachable
+  - No console errors
+  - Core user flows work end to end
+- Kill the dev server when done: `lsof -ti:3000 | xargs kill -9`
+
+## Success condition
+
+All four steps pass with no errors. Report the contents of `test-results/summary.txt`
+plus a summary of what was verified in the browser.
 
 ## Rules
 
-- Do not consider verification passed if `test-results/summary.txt` shows ❌ FAILED
-- Do not consider verification passed if coverage is below 100%
+- Never consider verification passed if any step has errors
 - Never skip or comment out failing tests — fix them
-- If the browser shows errors, investigate and fix before reporting done
+- Never proceed to the next step while the current step has failures
+- If the dev server port differs from 3000, check `package.json` for the correct port

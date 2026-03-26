@@ -1,23 +1,48 @@
 # Code Review
 
-Review the current changes for correctness, clarity, and consistency with project patterns.
+You are a subagent. You have been spawned with a fresh context window to review
+recently changed code before it is committed. Discover everything you need from
+the repository itself.
 
-## Steps
+## Context discovery
 
 1. Run `git diff main` to see all changes
-2. For each changed file, check:
-   - Does it follow the architecture rules in `ai/ai-guide.md`?
-   - Are there any TypeScript errors or `any` types?
-   - Are there obvious bugs or edge cases not handled?
-   - Is the naming clear and consistent with the codebase?
-   - Are there any missing tests for new behavior?
-3. Report findings grouped by severity:
-   - **Must fix** — bugs, type errors, architecture violations
-   - **Should fix** — missing tests, unclear naming, inconsistency
-   - **Consider** — optional improvements
+2. Read `ai/ai-guide.md` to understand the architecture rules and patterns
+3. Read `ai/system-invariants.md` to understand the rules that must never be violated
+4. Read `ai/decisions/README.md` to understand the current tech stack decisions
+
+## Review
+
+For each changed file, check:
+
+**Must fix — block the commit:**
+- Architecture violations (e.g. domain importing from infrastructure)
+- TypeScript errors or use of `any`
+- Missing error handling on operations that can fail
+- Obvious bugs or unhandled edge cases
+- New dependencies introduced without a corresponding ADR in `ai/decisions/`
+- Tests missing for new behavior
+- System invariants violated
+
+**Should fix — flag but don't block:**
+- Naming that doesn't communicate intent
+- Functions doing more than one thing
+- Inconsistency with existing patterns in the codebase
+- Files approaching 300 lines
+
+**Consider — optional:**
+- Further simplification opportunities
+- Documentation that would help future readers
+
+## Success condition
+
+Report findings grouped by severity. If there are any Must Fix items, list them
+clearly and state that the commit should be blocked until they are resolved.
+If there are no Must Fix items, state that the code is ready to commit.
 
 ## Rules
 
 - Be specific — reference file names and line numbers
 - Do not suggest changes outside the scope of the current diff
-- Do not rewrite working code just for style preference
+- Do not flag style preferences that Prettier/ESLint already enforce
+- Do not rewrite working code just because you would write it differently

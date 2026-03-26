@@ -83,6 +83,33 @@ This is not optional — undocumented decisions are not allowed changes.
 
 ---
 
+## Subagent Invocation
+
+The following slash commands are subagents — they run in a fresh context window
+and should be invoked automatically at the right points in the workflow, not just
+when the human asks. Each is self-contained and discovers its own context from
+the repository.
+
+Invoke subagents in this order after completing an implementation:
+
+```
+Implementation complete + tests passing
+  → invoke /simplify
+    → if simplify reports changes: re-run tests to confirm still passing
+  → invoke /verify
+    → if verify reports failures: fix them, then re-run /verify
+  → invoke /code-review
+    → if code-review reports Must Fix items: fix them, then re-run /code-review
+  → invoke /commit-push-pr
+    → subagent owns CI monitoring until green
+```
+
+Do not invoke a later subagent until the earlier one has reported success.
+Do not skip subagents — each one catches a different class of problems.
+If a subagent fails after 3 attempts to fix the issue, stop and ask for human input.
+
+---
+
 ## Style
 
 - Small, focused commits
