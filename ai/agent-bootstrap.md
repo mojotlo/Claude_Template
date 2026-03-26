@@ -29,8 +29,9 @@ Use Plan mode (Shift+Tab twice in Claude Code) before implementing.
 
 If the task references a GitHub issue number (e.g. "implement issue #12"):
 1. Run `gh issue view 12` to read the full issue spec
-2. Use the acceptance criteria as the definition of done
-3. Reference the issue number in the PR body as "Closes #12"
+2. Check the Dependencies section — if blocked by another issue, stop and report
+3. Use the acceptance criteria as the definition of done
+4. Reference the issue number in the PR body as "Closes #12"
 
 A good plan:
 - names the specific files to be changed

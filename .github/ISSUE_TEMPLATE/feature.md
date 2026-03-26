@@ -15,6 +15,10 @@ Why does this need to exist? What problem does it solve?
 - [ ] Another testable criterion
 - [ ] Edge case that must be handled
 
+## Dependencies
+- Blocked by: #<issue number> (or "none")
+- Must merge before: #<issue number> (or "none")
+
 ## Out of scope
 What this issue explicitly does NOT include. Be specific.
 
