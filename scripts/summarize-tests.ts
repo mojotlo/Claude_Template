@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable no-console */
 // Reads test-results/results.json and writes a human-readable summary
 // to test-results/summary.txt for Claude to read after test runs.
 
