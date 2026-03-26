@@ -17,6 +17,7 @@
       "Bash(gh pr *)",
       "Bash(gh run *)",
       "Bash(gh issue *)",
+      "Bash(gh label *)",
       "Bash(cat *)",
       "Bash(ls *)",
       "Bash(find *)",

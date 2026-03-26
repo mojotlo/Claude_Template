@@ -27,10 +27,16 @@ Do not skip steps. Do not jump straight to implementation.
 
 Use Plan mode (Shift+Tab twice in Claude Code) before implementing.
 
+If the task references a GitHub issue number (e.g. "implement issue #12"):
+1. Run `gh issue view 12` to read the full issue spec
+2. Use the acceptance criteria as the definition of done
+3. Reference the issue number in the PR body as "Closes #12"
+
 A good plan:
 - names the specific files to be changed
 - describes what will change in each file
 - identifies which tests cover the affected behavior
+- maps each acceptance criterion to a specific test case
 - flags any risk or uncertainty
 
 A good plan enables 1-shot implementation. Invest in it.

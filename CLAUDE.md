@@ -73,11 +73,43 @@ Code mode        → execute the spec; loop until all tests pass
 
 ---
 
+## Working with GitHub Issues
+
+Features and bugs are tracked as GitHub Issues. Each issue is a self-contained spec
+that Claude Code can execute in Plan mode.
+
+**To implement a feature:**
+1. Find the issue number on GitHub (e.g. #12)
+2. In Claude Code Plan mode: "Implement issue #12"
+3. Claude reads the issue, plans the change, you approve
+4. The PR body should include "Closes #12" to auto-close the issue on merge
+
+**Issue templates** live in `.github/ISSUE_TEMPLATE/`:
+- `feature.md` — new features with acceptance criteria
+- `bug.md` — bugs with reproduction steps
+
+**Priority labels:** P0 (critical), P1 (important), P2 (nice to have)
+
+---
+
+## Project Brief
+
+> Replace this section when cloning the template.
+> Keep it short — 1-3 paragraphs. Claude reads this every session.
+>
+> Cover:
+> - What this app does and who it's for
+> - The core problem it solves
+> - Any business rules or domain context Claude needs to understand
+> - Areas that are frozen or sensitive
+> - Anything Claude has done wrong before in this repo
+
+---
+
 ## Project-Specific Notes
 
 > Replace this section when cloning the template.
 > Add anything Claude should know about this specific project:
-> - business domain context
-> - areas that are frozen or sensitive
 > - non-obvious decisions that have already been made
-> - anything Claude has done wrong before in this repo
+> - third-party services in use (with links to their docs)
+> - known gotchas or areas of complexity
