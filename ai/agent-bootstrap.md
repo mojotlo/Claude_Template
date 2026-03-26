@@ -121,6 +121,26 @@ Invoke it whenever something went wrong, a retry was needed, or an architecture 
 
 ---
 
+## When to Bail
+
+Some sessions should be abandoned rather than continued. Run `/bail` when:
+
+- Tests have failed more than 3 times on the same issue
+- The approach turned out to be fundamentally wrong
+- The scope has expanded beyond the original issue
+- An architecture violation was discovered that requires rethinking the approach
+- Context window is above 80% and quality is visibly degrading
+- Claude is making changes to files outside the original plan
+
+Do not try to recover a session that should be bailed. Bail fast, capture the
+learning, and start fresh with a better plan.
+
+**Bail vs catchup:**
+- `/catchup` — session is paused but healthy, continue where you left off
+- `/bail` — session is going sideways, abandon and capture the learning
+
+---
+
 ## Resuming an Interrupted Session
 
 If you are starting a session in a worktree that already has commits or changes
