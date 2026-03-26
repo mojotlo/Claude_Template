@@ -52,7 +52,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "FILE=\"$CLAUDE_TOOL_RESULT_FILE\"; if [[ \"$FILE\" == *.py ]]; then ruff format \"$FILE\" && ruff check --fix \"$FILE\"; elif [[ \"$FILE\" == *.ts || \"$FILE\" == *.tsx || \"$FILE\" == *.js || \"$FILE\" == *.jsx ]]; then npx prettier --write \"$FILE\"; fi"
+            "command": "FILE=\"$CLAUDE_TOOL_RESULT_FILE\"; if [[ \"$FILE\" == *.py ]]; then ruff format \"$FILE\" && ruff check --fix \"$FILE\"; elif [[ \"$FILE\" == *.ts || \"$FILE\" == *.tsx || \"$FILE\" == *.js || \"$FILE\" == *.jsx ]]; then npx prettier --write \"$FILE\"; fi; if [[ \"$FILE\" == *.test.ts || \"$FILE\" == *.test.tsx ]]; then bash scripts/check-test-modifications.sh; fi"
           }
         ]
       }

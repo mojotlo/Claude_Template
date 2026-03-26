@@ -44,6 +44,43 @@ A good plan enables 1-shot implementation. Invest in it.
 
 ---
 
+## TDD Workflow
+
+For every new feature or behavior change, follow Red-Green-Refactor strictly:
+
+**Red** — write the test first, before any implementation:
+1. Read the acceptance criteria from the GitHub issue
+2. Write tests that assert each criterion is met
+3. Run `npm test` — tests must FAIL at this point
+   - If tests pass before implementation, the test is wrong — fix it
+4. Commit the failing tests: `git commit -m "test: add failing tests for <feature>"`
+
+**Green** — write the minimum implementation to make tests pass:
+1. Write only enough code to make the failing tests pass
+2. Run `npm test` after each meaningful change
+3. Do not write more than the tests require
+
+**Refactor** — clean up without changing behavior:
+1. Run `/simplify` — only after tests are green
+2. Tests must remain green throughout
+
+### Test modification rules
+
+Once a test is committed, it is frozen. You may:
+- Add new tests
+- Add new `describe` blocks
+
+You may NOT without explicit human approval:
+- Modify existing test assertions
+- Delete existing tests
+- Add `.skip` or `.todo` to existing tests
+- Weaken assertions (e.g. `toBe(x)` → `toBeDefined()`)
+
+If you believe an existing test is incorrect, stop and explain why.
+Do not change it. Wait for human confirmation before proceeding.
+
+---
+
 ## Scope Discipline
 
 Before starting, check `allowed-changes.md`.

@@ -23,6 +23,10 @@ For each changed file, check:
 - New dependencies introduced without a corresponding ADR in `ai/decisions/`
 - Tests missing for new behavior
 - System invariants violated
+- **Any modification to existing test files** — run `git diff main -- '*.test.ts'` to check
+  specifically. If existing test assertions were changed, weakened, or deleted,
+  this is a Must Fix regardless of whether tests pass. Flag it clearly and explain
+  what was changed. Do not approve test modifications without human review.
 
 **Should fix — flag but don't block:**
 - Naming that doesn't communicate intent

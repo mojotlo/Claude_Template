@@ -10,6 +10,23 @@ If completing a task would require violating an invariant, stop and request clar
 All automated tests must pass after any change.
 Tests define expected system behavior — they are not optional.
 
+## Test Integrity
+
+Tests are the source of truth. They are never changed to make failing code pass.
+
+- **Never modify an existing test to make it pass** — fix the implementation instead
+- **Never delete a failing test** — if a test is wrong, stop and ask for human clarification
+- **Never weaken a test assertion** — do not change `toBe(x)` to `toBeDefined()` or similar
+- **Never add `.skip` or `.todo` to a failing test** without explicit human instruction
+- **Adding new tests is always allowed** — only modification of existing tests is restricted
+
+If the only way to make tests pass is to change a test, that means either:
+1. The implementation approach is wrong — change the approach, not the test
+2. The test itself has a bug — stop, explain the issue, and ask for human approval before changing it
+
+This rule has no exceptions. A passing test suite achieved by modifying tests
+is worse than a failing test suite — it creates false confidence.
+
 ---
 
 ## Architecture Boundaries

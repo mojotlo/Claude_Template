@@ -15,7 +15,8 @@
     "test:summary": "npx tsx scripts/summarize-tests.ts",
     "test:all": "npm test && npm run test:integration && npm run test:e2e",
     "worktree:new": "bash scripts/new-worktree.sh",
-    "worktree:cleanup": "bash scripts/cleanup-worktree.sh"
+    "worktree:cleanup": "bash scripts/cleanup-worktree.sh",
+    "test:check-integrity": "bash scripts/check-test-modifications.sh"
   },
   "devDependencies": {
     "@playwright/test": "^1.44.0",
